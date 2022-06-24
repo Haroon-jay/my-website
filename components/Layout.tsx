@@ -11,16 +11,13 @@ type LayoutProps = {
   title?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({
-  title = "Haroon Jawad",
-  children,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{title}</title>
+        <title>{"Haroon Jawad"}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="utf-8" />
         <meta name="author" content="Haroon Jawad" />
@@ -28,31 +25,9 @@ const Layout: React.FC<LayoutProps> = ({
         <meta property="og:title" content="Haroon Jawad" />
         <meta
           property="og:description"
-          content="I'm a Full Stack developer with experience in Frontend, Backend and DevOps"
+          content="Haroon Jawad is a Fullstack JavaScript developer with a passion for building web applications."
         />
         <meta property="og:type" content="website" />
-        {/* <meta
-          property="og:image"
-          content="/"
-        /> */}
-        {/* {process.env.NODE_ENV === 'production' && (
-          <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-RZP6RWZ32F"
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-      
-                  gtag('config', 'G-RZP6RWZ32F');`,
-              }}
-            />
-          </>
-        )} */}
       </Head>
       <Nav
         isOpen={isOpen}
