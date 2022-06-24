@@ -153,7 +153,7 @@ const Home = (): JSX.Element => {
               face. Currently, I am working freelance and loving it. It is very
               rewarding to be able to help people bring their visions to the web
               and even more so when you go above their expectations. I offer my
-              services on multiple freelacing platforms and am a Toprated
+              services on multiple freelancing platforms and am a Toprated
               Fullstack JavaScript developer on Upwork. Check out{" "}
               <a
                 href="https://www.upwork.com/freelancers/~0182acc05b85e44e20"
