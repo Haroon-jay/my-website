@@ -148,9 +148,13 @@ const Home = (): JSX.Element => {
           <Container>
             <Text textAlign="center">
               I&apos;m a Full Stack JavaScript developer with experience in
-              Backend, Frontend and DevOps. I offer my services on multiple
-              freelacing platforms and am a Toprated Fullstack JavaScript
-              developer on Upwork. Check out{" "}
+              Backend, Frontend and DevOps. I am an excellent problem solver,
+              and will often find creative solutions for challenging problems I
+              face. Currently, I am working freelance and loving it. It is very
+              rewarding to be able to help people bring their visions to the web
+              and even more so when you go above their expectations. I offer my
+              services on multiple freelacing platforms and am a Toprated
+              Fullstack JavaScript developer on Upwork. Check out{" "}
               <a
                 href="https://www.upwork.com/freelancers/~0182acc05b85e44e20"
                 target={"_blank"}
@@ -161,9 +165,7 @@ const Home = (): JSX.Element => {
               my clients say about me {":)"}
             </Text>
           </Container>
-          <Link href="/about">
-            <Button>More about me &rarr;</Button>
-          </Link>
+          <Button>Contact Me &rarr;</Button>
         </Container>
       </Container>
 
