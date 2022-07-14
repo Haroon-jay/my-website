@@ -10,12 +10,6 @@ const testimonials = [
     content:
       "Haroon is a great UI/UX developer.  He has worked well with our distributed teams to build out the worlds best ADHD digital therapeutic solution.  Without his knowledge and creativity we would never have been as successful.",
   },
-  {
-    name: "Shirley Fultz",
-    title: "Designer",
-    content:
-      "It's freeing to be able to catch up on customized news and not be distracted by a social media element on the same site",
-  },
 ];
 export default function Testimonials() {
   return (
