@@ -27,26 +27,42 @@ import {
   SiJavascript,
   SiFirebase,
   SiGraphql,
+  SiPostgresql,
+  SiOpenai,
+  SiPython,
+  SiLangchain,
+  SiN8N,
 } from "react-icons/si";
+
+import { FloatingChatWidget } from "./chat";
+
 const experiences = [
   {
     title: "Fullstack JavaScript Developer, Independent Contractor",
-    date: "2/4/2020",
+    date: "9/1/2019",
     caption:
-      "As an Independent Contractor/Freelancer, I have worked on tens of projects for clients all over the world ranging from the healthcare, ecommerce, edtech industries - I have completed around 40 projects on Upwork and am a Toprated Fullstack JavaScript developer with a 100% Job Success Score - Most of these projects were using JavaScript, TypeScript, React.js, Node.js, Express.js, Next.js, Firebase, MongoDB",
+      "As an Independent Contractor/Freelancer, I successfully completed approximately 40 diverse projects for clients globally across various industries, including healthcare, ecommerce, and edtech. My expertise in JavaScript, TypeScript, React.js, Node.js, Express.js, Next.js, Firebase, and MongoDB has enabled me to achieve a Toprated Plus status on Upwork with a 100% Job Success Score. I pride myself on delivering high-quality solutions that exceed client expectations.",
   },
 
   {
     title: "React Developer, Atentiv LLC",
     date: "9/1/2021",
     caption:
-      "Built and managed the patient Management portal for Atentiv LLC using React/TypeScript and Material UI-Implemented User facing features for different roles ranging from patient, caregiver, physician, admin etc- Visualized Data with Beautiful,interactive charts acting as reusable React components using D3 modules",
+      "At Atentiv LLC, I played a key role in building and managing a comprehensive Patient Management Portal using React and TypeScript, complemented by Material UI for an intuitive user experience. My responsibilities included developing user-facing features tailored to the needs of various roles, such as patients, caregivers, physicians, and admins. Additionally, I utilized D3.js to create beautiful, interactive data visualizations that acted as reusable React components, enhancing the analytics capabilities of the application.",
   },
+
   {
-    title: "JavaScript Developer, Jslytics Agency",
-    date: "4/1/2021",
+    title: "JavaScript Developer, Jslytics",
+    date: "3/1/2021",
     caption:
-      "Implemented server side tracking with GTM-Built Custom JavaScript variables to transform data before sending to different analytics solutions-Integrated several enterprise level web applications with Hubspot, Salesforce",
+      "At Jslytics, I focused on server-side tracking implementation using Google Tag Manager. I developed custom JavaScript variables to manipulate and transform data before it was sent to various analytics platforms. My work involved integrating multiple enterprise-level web applications with marketing and analytics solutions like Hubspot and Salesforce, ensuring precise data tracking and analysis for our clients.",
+  },
+
+  {
+    title: "Senior Full Stack Engineer, PrivateID",
+    date: "9/1/2022",
+    caption:
+      "In my current role at PrivateID, I am responsible for integrating Machine Learning models into ID verification workflows, enhancing system efficiency and accuracy. Additionally, I developed a configurable rules builder that allows users to customize workflows according to their specific requirements. My contributions have significantly improved our product capabilities in secure identity verification.",
   },
 ];
 import styles from "@styles/Home.module.css";
@@ -56,24 +72,18 @@ const Home = (): JSX.Element => {
     () => [
       {
         Icon: SiHtml5,
-        url: "/",
-
+        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
         title: "HTML5",
       },
       {
         Icon: SiCss3,
-        url: "/",
+        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
         title: "CSS3",
       },
       {
         Icon: SiJavascript,
-        url: "/",
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
         title: "JavaScript",
-      },
-      {
-        Icon: SiReact,
-        url: "https://reactjs.org/",
-        title: "React",
       },
       {
         Icon: SiTypescript,
@@ -81,19 +91,9 @@ const Home = (): JSX.Element => {
         title: "TypeScript",
       },
       {
-        Icon: SiNodedotjs,
-        url: "/",
-        title: "Node.js",
-      },
-      {
-        Icon: SiExpress,
-        url: "/",
-        title: "Express.js",
-      },
-      {
-        Icon: SiMongodb,
-        url: "/",
-        title: "MongoDB",
+        Icon: SiReact,
+        url: "https://reactjs.org/",
+        title: "React",
       },
       {
         Icon: SiNextdotjs,
@@ -101,16 +101,56 @@ const Home = (): JSX.Element => {
         title: "Next.js",
       },
       {
+        Icon: SiNodedotjs,
+        url: "https://nodejs.org/",
+        title: "Node.js",
+      },
+      {
+        Icon: SiExpress,
+        url: "https://expressjs.com/",
+        title: "Express.js",
+      },
+      {
+        Icon: SiMongodb,
+        url: "https://mongodb.com/",
+        title: "MongoDB",
+      },
+      {
         Icon: SiFirebase,
-        url: "/",
+        url: "https://firebase.google.com/",
         title: "Firebase",
+      },
+      {
+        Icon: SiPostgresql,
+        url: "https://www.postgresql.org/",
+        title: "PostgreSQL",
       },
       {
         Icon: SiKubernetes,
         url: "https://kubernetes.io/",
         title: "Kubernetes",
       },
+      {
+        Icon: SiOpenai,
+        url: "https://openai.com/",
+        title: "OpenAI",
+      },
+      {
+        url: "https://www.langchain.com/",
+        title: "LangChain",
+        Icon: SiLangchain,
+      },
+      {
+        url: "https://n8n.io/",
+        title: "n8n",
+        Icon: SiN8N,
+      },
 
+      {
+        Icon: SiPython,
+        url: "https://www.python.org/",
+        title: "Python",
+      },
       {
         Icon: SiGraphql,
         url: "https://graphql.org/",
@@ -119,8 +159,10 @@ const Home = (): JSX.Element => {
     ],
     [],
   );
+
   return (
     <Container>
+      <FloatingChatWidget />
       <Container
         justifyContent="center"
         alignContent="center"
@@ -131,14 +173,22 @@ const Home = (): JSX.Element => {
         gridGap="2rem"
       >
         <Container alignItems="center" alignContent="center">
-          <Image
-            src="/me.jpg"
+          <div className={styles.imageWrapper}>
+            <Image
+              src="/me.jpeg"
+              alt="Haroon Jawad"
+              layout="fill"
+              className={styles.image}
+            />
+          </div>
+          {/* <Image
+            src="/me.jpeg"
             alt="Haroon Jawad"
             width="120px"
             height="120px"
             objectFit="cover"
-            className={styles.image}
-          />
+            className={styles.image} */}
+          {/* /> */}
           <Title>
             {" "}
             <Link id="#about">Haroon Jawad</Link>{" "}
@@ -147,22 +197,27 @@ const Home = (): JSX.Element => {
         <Container maxWidth="700px" gridGap="3rem">
           <Container>
             <Text textAlign="center">
-              I&apos;m a Full Stack JavaScript developer with experience in
-              Backend, Frontend and DevOps. I am an excellent problem solver,
-              and will often find creative solutions for challenging problems I
-              face. Currently, I am working freelance and loving it. It is very
-              rewarding to be able to help people bring their visions to the web
-              and even more so when you go above their expectations. I offer my
-              services on multiple freelancing platforms and am a Toprated
-              Fullstack JavaScript developer on Upwork. Check out{" "}
-              <a
-                href="https://www.upwork.com/freelancers/~0182acc05b85e44e20"
-                target={"_blank"}
-              >
-                my Upwork Profile{" "}
-              </a>{" "}
-              to take a look at some of the projects that I have done and what
-              my clients say about me {":)"}
+              I'm a Senior Full Stack Engineer and AI Applications Developer
+              with deep experience in building scalable web platforms and
+              intelligent systems. My work spans both ends of the stack—React,
+              Node.js, MongoDB, and SQL—as well as advanced AI/ML integrations
+              using OpenAI, LangChain, LangGraph, and Retrieval-Augmented
+              Generation (RAG).
+            </Text>
+            <Text>
+              In addition to full stack development, I specialize in building
+              agentic AI systems—autonomous agents that reason, plan, and take
+              action using tools like CrewAI and structured reasoning pipelines.
+              Whether it’s deploying LLM-powered assistants, integrating AI into
+              real-world workflows, or creating robust APIs around intelligent
+              features, I bring both technical execution and strategic thinking
+              to every project.
+            </Text>
+            <Text>
+              I've delivered projects for startups, healthcare platforms,
+              ML-integrated ID verification tools, and analytics dashboards. I’m
+              also a Top Rated Plus developer on Upwork, where I help global
+              clients bring their technical visions to life.
             </Text>
           </Container>
           <Button>Contact Me &rarr;</Button>
@@ -235,14 +290,27 @@ const Home = (): JSX.Element => {
           maxWidth="40rem"
           links
         >
-          {stacks.map(({ Icon, url, title }, i) => (
-            <Link href={url} key={url}>
-              <Card key={i}>
-                <Icon size="2rem" />
-                <span>{title} </span>
-              </Card>
-            </Link>
-          ))}
+          {stacks.map(({ Icon, url, title }, i) => {
+            // if (img) {
+            //   return (
+            //     <Link href={url} key={url}>
+            //       <Card key={i}>
+            //         <Image src={img} alt={title} width="40px" height="40px" />
+            //         <span>{title} </span>
+            //       </Card>
+            //     </Link>
+            //   );
+            // }
+            return (
+              <Link href={url} key={url}>
+                <Card key={i}>
+                  {/* @ts-ignore */}
+                  <Icon size="2rem" />
+                  <span>{title} </span>
+                </Card>
+              </Link>
+            );
+          })}
         </Grid>
       </Container>
       <Container
@@ -257,7 +325,7 @@ const Home = (): JSX.Element => {
           <Link id="work-experiences">Work Experiences</Link>
         </Title>
         <Container width="100%">
-          {experiences.map((experience, i) => (
+          {experiences.reverse().map((experience, i) => (
             <TransparentLink href="#" key={i}>
               <Grid
                 key={i}
@@ -295,9 +363,10 @@ const Home = (): JSX.Element => {
                       </Text>
                     </Grid>
                     <List marginTop={10}>
-                      {experience.caption.split("-").map((item) => (
+                      {experience.caption}
+                      {/* {experience.caption.split("-").map((item) => (
                         <li key={item}>- {item}.</li>
-                      ))}
+                      ))} */}
                     </List>
                   </Container>
                 </Grid>

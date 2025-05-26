@@ -1,11 +1,11 @@
-# [shellbear.me](https://shellbear.me/)
+# [haroonjawad.com](https://www.haroonjawad.com)
 
 Source code of my personal website & blog ✨
 
-Check the live version [here](https://shellbear.me/) ⚡️
+Check the live version [here](https://www.haroonjawad.com) ⚡️
 
-[![home](./.github/img/home.png)](https://shellbear.me/)
-[![blog](./.github/img/blog.png)](https://shellbear.me/)
+[![home](./.github/img/home.png)](https://www.haroonjawad.com)
+[![blog](./.github/img/blog.png)](https://www.haroonjawad.com)
 
 ## ✨ Features
 

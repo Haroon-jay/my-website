@@ -4,6 +4,9 @@ import Container from "./Container";
 import styled from "styled-components";
 import Menu from "@icons/Menu";
 import Close from "@icons/Close";
+import Button from "./Button";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 const NavLink = styled.a`
   color: inherit;
@@ -90,8 +93,27 @@ const Nav = ({ isOpen, onOpen, onClose }: NavProps): JSX.Element => {
           <Links />
         </Grid>
       </Container>
-      <Container alignContent="flex-end" display={["none", "none", "flex"]}>
-        <NavLink href="mailto:haroonjawad6@gmail.com">Contact</NavLink>
+      <Container
+        alignContent="flex-end"
+        display={["none", "none", "flex"]}
+        padding={"10px"}
+      >
+        <Link href={"/chat"}>
+          <Button>
+            Talk to my AI Assistant{" "}
+            <motion.span
+              initial={{ display: "inline-block" }}
+              animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "reverse",
+                duration: 2.5,
+              }}
+            >
+              🤖
+            </motion.span>{" "}
+          </Button>
+        </Link>
       </Container>
     </Grid>
   );

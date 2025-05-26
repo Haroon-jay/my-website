@@ -6,9 +6,23 @@ const testimonials = [
   {
     name: "Shane Robinett",
     title: "CTO, Atentiv LLC",
-    img: "/shane-robinett",
+    img: "/shane-robinett.jpg",
     content:
-      "Haroon is a great UI/UX developer.  He has worked well with our distributed teams to build out the worlds best ADHD digital therapeutic solution.  Without his knowledge and creativity we would never have been as successful.",
+      "Haroon is a great UI/UX developer. He has worked well with our distributed teams to build out the worlds best ADHD digital therapeutic solution. Without his knowledge and creativity we would never have been as successful.",
+  },
+  {
+    name: "Joe Rensin",
+    title: "CEO, Bondbury",
+    img: "/joe.webp",
+    content:
+      "Haroon does excellent work and looks for alternative solutions. He is a great team player and has a positive attitude. I highly recommend him.",
+  },
+  {
+    name: "Jason Spanomanolis",
+    title: "CEO, Jslytics",
+    img: "/jason.jpeg",
+    content:
+      "Great freelancer, Thanks so much! Great communication and delivery",
   },
 ];
 export default function Testimonials() {
@@ -43,7 +57,7 @@ interface Item {
 function Testimonial({ item: { name, title, img, content } }: Item) {
   return (
     <div>
-      <img src={`${img ? img : "/user"}.jpg`} />
+      <img src={`${img ? img : "/user.jpg"}`} />
       <div className="myCarousel">
         <h3>{name} </h3>
         <h4>{title}</h4>

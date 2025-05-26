@@ -4,7 +4,7 @@ import Grid from "./Grid";
 import Link from "./Link";
 import Text from "./Text";
 import React from "react";
-import { SiGithub, SiLinkedin, SiUpwork } from "react-icons/si";
+import { SiGithub, SiLinkedin } from "react-icons/si";
 import { MdMail } from "react-icons/md";
 
 const StyledFooter = styled.footer`
@@ -44,10 +44,10 @@ const Footer = (): JSX.Element => {
         url: "https://www.linkedin.com/in/haroon-jawad-7942151ba/",
         icon: SiLinkedin,
       },
-      {
-        url: "https://www.upwork.com/freelancers/~0182acc05b85e44e20",
-        icon: SiUpwork,
-      },
+      // {
+      //   url: "https://www.upwork.com/freelancers/~0182acc05b85e44e20",
+      //   icon: SiUpwork,
+      // },
     ],
     [],
   );
@@ -65,6 +65,7 @@ const Footer = (): JSX.Element => {
       <FooterGrid>
         {links.map(({ url, icon: Icon }) => (
           <Link key={url} target="_blank" opacity={0.7} href={url}>
+            {/* @ts-ignore */}
             <Icon size={22} />
           </Link>
         ))}
