@@ -38,33 +38,43 @@ import { FloatingChatWidget } from "./chat";
 
 const experiences = [
   {
-    title: "Fullstack JavaScript Developer, Independent Contractor",
-    date: "9/1/2019",
-    caption:
-      "As an Independent Contractor/Freelancer, I successfully completed approximately 40 diverse projects for clients globally across various industries, including healthcare, ecommerce, and edtech. My expertise in JavaScript, TypeScript, React.js, Node.js, Express.js, Next.js, Firebase, and MongoDB has enabled me to achieve a Toprated Plus status on Upwork with a 100% Job Success Score. I pride myself on delivering high-quality solutions that exceed client expectations.",
-  },
-
-  {
-    title: "React Developer, Atentiv LLC",
-    date: "9/1/2021",
-    caption:
-      "At Atentiv LLC, I played a key role in building and managing a comprehensive Patient Management Portal using React and TypeScript, complemented by Material UI for an intuitive user experience. My responsibilities included developing user-facing features tailored to the needs of various roles, such as patients, caregivers, physicians, and admins. Additionally, I utilized D3.js to create beautiful, interactive data visualizations that acted as reusable React components, enhancing the analytics capabilities of the application.",
-  },
-
-  {
-    title: "JavaScript Developer, Jslytics",
-    date: "3/1/2021",
-    caption:
-      "At Jslytics, I focused on server-side tracking implementation using Google Tag Manager. I developed custom JavaScript variables to manipulate and transform data before it was sent to various analytics platforms. My work involved integrating multiple enterprise-level web applications with marketing and analytics solutions like Hubspot and Salesforce, ensuring precise data tracking and analysis for our clients.",
-  },
-
-  {
-    title: "Senior Full Stack Engineer, PrivateID",
-    date: "9/1/2022",
+    title: "Senior Full Stack Engineer",
+    company: "PrivateID",
+    date: "Sep 2022 – Present",
+    link: "https://privateid.com/", // Update if company website is preferred
+    logo: "/logos/privateid.png",
     caption:
       "In my current role at PrivateID, I am responsible for integrating Machine Learning models into ID verification workflows, enhancing system efficiency and accuracy. Additionally, I developed a configurable rules builder that allows users to customize workflows according to their specific requirements. My contributions have significantly improved our product capabilities in secure identity verification.",
   },
+  {
+    title: "React Developer",
+    company: "Atentiv LLC",
+    date: "Sep 2021 – Sep 2022",
+    link: "https://www.linkedin.com/company/atentiv-llc", // Update if company website is preferred
+    logo: "/logos/atentiv.png",
+    caption:
+      "At Atentiv LLC, I played a key role in building and managing a comprehensive Patient Management Portal using React and TypeScript, complemented by Material UI for an intuitive user experience. My responsibilities included developing user-facing features tailored to the needs of various roles, such as patients, caregivers, physicians, and admins. Additionally, I utilized D3.js to create beautiful, interactive data visualizations that acted as reusable React components, enhancing the analytics capabilities of the application.",
+  },
+  {
+    title: "JavaScript Developer",
+    company: "Jslytics",
+    date: "Mar 2020 – Sep 2021",
+    link: "https://www.jslytics.com", // Update if company website is preferred
+    logo: "/logos/jslytics.png",
+    caption:
+      "At Jslytics, I focused on server-side tracking implementation using Google Tag Manager. I developed custom JavaScript variables to manipulate and transform data before it was sent to various analytics platforms. My work involved integrating multiple enterprise-level web applications with marketing and analytics solutions like Hubspot and Salesforce, ensuring precise data tracking and analysis for our clients.",
+  },
+  {
+    title: "Fullstack JavaScript Developer",
+    company: "Independent Contractor",
+    date: "Sep 2019 – Mar 2021",
+    link: "https://www.upwork.com",
+    logo: "/logos/freelancer.png",
+    caption:
+      "As an Independent Contractor/Freelancer, I successfully completed approximately 40 diverse projects for clients globally across various industries, including healthcare, ecommerce, and edtech. My expertise in JavaScript, TypeScript, React.js, Node.js, Express.js, Next.js, Firebase, and MongoDB has enabled me to achieve a Toprated Plus status on Upwork with a 100% Job Success Score. I pride myself on delivering high-quality solutions that exceed client expectations.",
+  },
 ];
+
 import styles from "@styles/Home.module.css";
 
 const Home = (): JSX.Element => {
@@ -194,7 +204,7 @@ const Home = (): JSX.Element => {
             <Link id="#about">Haroon Jawad</Link>{" "}
           </Title>
         </Container>
-        <Container maxWidth="700px" gridGap="3rem">
+        <Container width={"100%"} maxWidth="700px" gridGap="3rem">
           <Container>
             <Text textAlign="center">
               I'm a Senior Full Stack Engineer and AI Applications Developer
@@ -325,49 +335,78 @@ const Home = (): JSX.Element => {
           <Link id="work-experiences">Work Experiences</Link>
         </Title>
         <Container width="100%">
-          {experiences.reverse().map((experience, i) => (
-            <TransparentLink href="#" key={i}>
+          {experiences.map((experience, i) => (
+            <TransparentLink
+              href={experience.link}
+              key={i}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Grid
-                key={i}
-                gridTemplateColumns="1fr 4fr"
+                gridTemplateColumns={["auto 1fr", "0.5fr 5fr", "1fr 4fr"]}
                 justifyItems="flex-start"
                 gridGap="1rem"
                 paddingY="2rem"
                 borderBottom="1px solid rgba(0,0,0,0.1)"
               >
+                {/* Index */}
                 <Container width="100%">
-                  <Text>0{i + 1}</Text>
+                  <Text fontWeight="bold">0{i + 1}</Text>
                 </Container>
-                <Grid width="100%" gridTemplateColumns="4fr 1fr">
+
+                {/* Main Content */}
+                <Grid width="100%">
                   <Container
                     width="100%"
                     alignItems="flex-start"
                     textAlign="start"
                   >
+                    {/* Title, Date, Logo */}
                     <Grid
                       width="100%"
-                      gridTemplateColumns="repeat(2, auto)"
-                      justifyItems="flex-start"
+                      gridTemplateColumns={["1fr", "auto 1fr auto"]}
+                      alignItems="center"
                       justifyContent="flex-start"
                       gridGap="1rem"
                     >
-                      <Title fontSize="1.5rem" margin={0} as="h3">
-                        {experience.title}
-                      </Title>
+                      {/* Logo */}
+                      {/* <img
+                        src={experience.logo}
+                        alt={`${experience.company} logo`}
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          objectFit: "contain",
+                          borderRadius: "4px",
+                        }}
+                      /> */}
+
+                      {/* Title & Company */}
+                      <div>
+                        <Title fontSize="1.25rem" margin={0} textAlign={"left"}>
+                          {experience.title},{" "}
+                          <strong
+                            style={{
+                              textDecoration: "underline",
+                            }}
+                          >
+                            {experience.company}
+                          </strong>
+                        </Title>
+                      </div>
+
+                      {/* Date */}
                       <Text
                         fontSize="smaller"
-                        margin={0}
-                        color="rgba(0, 0, 0, 0.1)"
+                        color="rgba(0, 0, 0, 0.4)"
+                        // textAlign="right"
                       >
                         {experience.date}
                       </Text>
                     </Grid>
-                    <List marginTop={10}>
-                      {experience.caption}
-                      {/* {experience.caption.split("-").map((item) => (
-                        <li key={item}>- {item}.</li>
-                      ))} */}
-                    </List>
+
+                    {/* Caption */}
+                    <List marginTop="1rem">{experience.caption}</List>
                   </Container>
                 </Grid>
               </Grid>

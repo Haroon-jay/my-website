@@ -24,6 +24,39 @@ const NavLink = styled.a`
   }
 `;
 
+const MobileNavLink = styled.a`
+  display: block;
+  padding: 0.75rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+
+  &:hover {
+    color: #0070f3;
+    border-bottom: 2px solid #0070f3;
+  }
+`;
+
+const AssistantLink = styled(MobileNavLink)`
+  color: #111;
+  border-radius: 8px;
+  background: #f1f1f1;
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: 600;
+  padding: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #0070f3;
+    color: white;
+    border-bottom: none;
+  }
+`;
+
 const MenuContainer = styled(Container)`
   cursor: pointer;
 `;
@@ -36,19 +69,87 @@ export interface NavProps {
 
 const Links = (): JSX.Element => (
   <>
-    <NavLink href="#about">About</NavLink>
-    <NavLink href="#tech-stack">Technologies</NavLink>
-    <NavLink href="#work-experiences">Experiences</NavLink>
-    <NavLink href="#testimonials">Testimonials</NavLink>
+    <Link
+      href={{
+        pathname: "/",
+        hash: "#about",
+      }}
+    >
+      <NavLink>About</NavLink>
+    </Link>
+    <Link
+      href={{
+        pathname: "/",
+        hash: "#tech-stack",
+      }}
+    >
+      <NavLink>Technologies</NavLink>
+    </Link>
+    <Link
+      href={{
+        pathname: "/",
+        hash: "#work-experiences",
+      }}
+    >
+      <NavLink>Experiences</NavLink>
+    </Link>
+    <Link
+      href={{
+        pathname: "/",
+        hash: "#testimonials",
+      }}
+    >
+      <NavLink>Testimonials</NavLink>
+    </Link>
+
     {/* <NavLink href="/projects">Projects</NavLink> */}
   </>
 );
 
 const Nav = ({ isOpen, onOpen, onClose }: NavProps): JSX.Element => {
+  const MobileLinks = (): JSX.Element => (
+    <div onClick={onClose}>
+      <Link
+        href={{
+          pathname: "/",
+          hash: "#about",
+        }}
+      >
+        <MobileNavLink>About</MobileNavLink>
+      </Link>
+      <Link
+        href={{
+          pathname: "/",
+          hash: "#tech-stack",
+        }}
+      >
+        <MobileNavLink>Technologies</MobileNavLink>
+      </Link>
+      <Link
+        href={{
+          pathname: "/",
+          hash: "#work-experiences",
+        }}
+      >
+        <MobileNavLink>Experiences</MobileNavLink>
+      </Link>
+      <Link
+        href={{
+          pathname: "/",
+          hash: "#testimonials",
+        }}
+      >
+        <MobileNavLink>Testimonials</MobileNavLink>
+      </Link>
+
+      {/* <MobileNavLink href="/projects">Projects</MobileNavLink> */}
+    </div>
+  );
+
   return (
     <Grid
       as="nav"
-      px={["2rem", "2rem", "2rem", "0"]}
+      px={["2rem", "2rem", "2rem", "1rem"]}
       gridTemplateColumns={["1fr", "1fr", "1fr 1fr 1fr"]}
       alignContent="center"
       justifyContent={["center", "center", "space-between"]}
@@ -73,7 +174,8 @@ const Nav = ({ isOpen, onOpen, onClose }: NavProps): JSX.Element => {
       </MenuContainer>
       {isOpen && (
         <Grid gridTemplateColumns="1fr" style={{ fontSize: "2rem" }} py="3rem">
-          <Links />
+          <MobileLinks />
+          <AssistantLink href="/chat">Talk to my AI Assistant 🤖</AssistantLink>
         </Grid>
       )}
       <Container alignContent="center" display={["none", "flex", "flex"]}>

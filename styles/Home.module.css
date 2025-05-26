@@ -19,6 +19,9 @@
   align-items: center;
 }
 
+
+
+
 @media (max-width: 600px) {
   .main {
     padding: 1rem 0;

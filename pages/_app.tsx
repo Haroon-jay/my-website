@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
+      style={{ width: "100%" }}
     >
       <Component {...pageProps} />
     </motion.div>
