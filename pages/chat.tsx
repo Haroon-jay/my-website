@@ -192,6 +192,7 @@ const FloatingChatWidget = ({
 
   const handleIframeLoad = () => {
     setIsLoading(false);
+    setIsMinimized(false);
   };
 
   const suggestedQuestions = [
