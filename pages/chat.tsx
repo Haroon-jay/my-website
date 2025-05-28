@@ -93,6 +93,10 @@ const ChatWindow = styled(motion.div)`
   overflow: hidden;
   transition: all 0.3s ease;
   height: ${(props: any) => (props.isMinimized ? "50px" : "580px")};
+
+  @media (max-width: 600px) {
+    max-width: 320px;
+  }
 `;
 
 const ChatHeader = styled.div`
