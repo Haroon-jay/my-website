@@ -1,8 +1,13 @@
 import { Container, Text, Title } from "@components";
 import { AnimatePresence, motion } from "framer-motion";
 import { ExternalLink, MessageCircle, X } from "lucide-react";
-import { useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+
+// Flip to true once the Hugging Face Space is redeployed
+// (and update huggingFaceSpaceUrl defaults below if the Space name changed).
+const ASSISTANT_LIVE = false;
 
 const StatusIndicator = styled.div`
   width: 8px;
@@ -43,11 +48,11 @@ const FloatingContainer = styled.div`
 `;
 
 const ChatButton = styled(motion.button)`
-  background: black;
-  color: white;
+  background: linear-gradient(135deg, #00c4ec, #00d4ff);
+  color: #03161d;
   padding: 16px;
   border-radius: 50%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 28px rgba(0, 212, 255, 0.4);
   border: none;
   cursor: pointer;
   display: flex;
@@ -57,7 +62,7 @@ const ChatButton = styled(motion.button)`
   transition: all 0.3s ease;
 
   &:hover {
-    background: #333;
+    box-shadow: 0 14px 36px rgba(0, 212, 255, 0.55);
     transform: scale(1.05);
   }
 
@@ -189,10 +194,19 @@ const SuggestionItem = styled.div`
 const FloatingChatWidget = ({
   huggingFaceSpaceUrl = "https://haroon-jay-career-conversations.hf.space/",
 }) => {
+  if (!ASSISTANT_LIVE) return null;
+  /* eslint-disable react-hooks/rules-of-hooks -- ASSISTANT_LIVE is a build-time constant */
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [timedOut, setTimedOut] = useState(false);
   const iframeRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen || !isLoading) return;
+    const t = setTimeout(() => setTimedOut(true), 15000);
+    return () => clearTimeout(t);
+  }, [isOpen, isLoading]);
 
   const handleIframeLoad = () => {
     setIsLoading(false);
@@ -276,25 +290,50 @@ const FloatingChatWidget = ({
                     exit={{ opacity: 0 }}
                   >
                     <LoadingContent>
-                      <LoadingDots>
-                        <LoadingDot
-                          variants={loadingDotVariants}
-                          animate="animate"
-                        />
-                        <LoadingDot
-                          variants={loadingDotVariants}
-                          animate="animate"
-                          transition={{ delay: 0.1 }}
-                        />
-                        <LoadingDot
-                          variants={loadingDotVariants}
-                          animate="animate"
-                          transition={{ delay: 0.2 }}
-                        />
-                      </LoadingDots>
-                      <Text fontSize="14px" color="#6b7280">
-                        Loading AI Assistant...
-                      </Text>
+                      {timedOut ? (
+                        <>
+                          <Text
+                            fontSize="14px"
+                            color="#374151"
+                            textAlign="center"
+                          >
+                            The assistant is waking up from sleep — this can
+                            take a minute or two.
+                          </Text>
+                          <Text
+                            fontSize="13px"
+                            color="#6b7280"
+                            textAlign="center"
+                          >
+                            In a hurry?{" "}
+                            <a href="mailto:haroonjawad6@gmail.com">
+                              Email Haroon directly
+                            </a>
+                          </Text>
+                        </>
+                      ) : (
+                        <>
+                          <LoadingDots>
+                            <LoadingDot
+                              variants={loadingDotVariants}
+                              animate="animate"
+                            />
+                            <LoadingDot
+                              variants={loadingDotVariants}
+                              animate="animate"
+                              transition={{ delay: 0.1 }}
+                            />
+                            <LoadingDot
+                              variants={loadingDotVariants}
+                              animate="animate"
+                              transition={{ delay: 0.2 }}
+                            />
+                          </LoadingDots>
+                          <Text fontSize="14px" color="#6b7280">
+                            Loading AI Assistant...
+                          </Text>
+                        </>
+                      )}
                     </LoadingContent>
                   </LoadingOverlay>
                 )}
@@ -340,13 +379,12 @@ const FloatingChatWidget = ({
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  background: #f8fafc;
+  background: #05070a;
 `;
 
 const HeaderSection = styled.div`
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid #e2e8f0;
+  background: rgba(14, 17, 23, 0.85);
+  border-bottom: 1px solid rgba(168, 179, 197, 0.14);
 `;
 
 const ChatPageContainer = styled.div`
@@ -386,15 +424,15 @@ const SuggestedQuestionsGrid = styled.div`
 
 const QuestionCard = styled(motion.div)`
   padding: 12px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #111827;
+  border: 1px solid rgba(168, 179, 197, 0.18);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
+    background: #14203a;
+    border-color: rgba(0, 212, 255, 0.45);
   }
 `;
 
@@ -437,7 +475,7 @@ const DedicatedChatPage = ({
           <Title fontSize="2.5rem" marginBottom="1rem">
             Chat with Haroon's AI Assistant
           </Title>
-          <Text color="#6b7280" margin="0 auto">
+          <Text color="#a8b3c5" margin="0 auto">
             I'm an AI assistant trained on Haroon's professional background. Ask
             me anything about his experience as a Senior Full Stack Engineer and
             AI Applications Developer, his projects, skills, or how to get in
@@ -507,6 +545,12 @@ const DedicatedChatPage = ({
           </ChatPageContent>
         </ChatPageContainer>
 
+        <Text fontSize="13px" color="#a8b3c5" textAlign="center">
+          Assistant stuck on loading? It may be waking from sleep — give it a
+          minute, or{" "}
+          <a href="mailto:haroonjawad6@gmail.com">email Haroon directly</a>.
+        </Text>
+
         {/* Suggested Questions */}
         <Container gridGap="1.5rem">
           <Title fontSize="1.5rem" textAlign="center">
@@ -533,12 +577,12 @@ const DedicatedChatPage = ({
                     style={{
                       width: "6px",
                       height: "6px",
-                      background: "black",
+                      background: "#00D4FF",
                       borderRadius: "50%",
                       flexShrink: 0,
                     }}
                   />
-                  <Text fontSize="14px" color="#374151">
+                  <Text fontSize="14px" color="#c3cbd8">
                     {question}
                   </Text>
                 </div>
@@ -592,8 +636,72 @@ const DedicatedChatPage = ({
 // ===========================================
 
 // ===========================================
+// WORK-IN-PROGRESS PAGE (shown while ASSISTANT_LIVE = false)
+// ===========================================
+
+const AssistantWip = (): JSX.Element => (
+  <section className="hero" style={{ minHeight: "70vh" }}>
+    <div className="wrap hero-grid">
+      <div className="hero-left">
+        <div className="terminal" style={{ cursor: "default" }}>
+          <div className="terminal-bar">
+            <span className="dot r" />
+            <span className="dot y" />
+            <span className="dot g" />
+            <span className="t-title">haroon@ai — maintenance</span>
+          </div>
+          <div className="terminal-body" style={{ minHeight: 0 }}>
+            <div className="t-line">
+              <span className="t-prompt">haroon@ai ~ %</span>
+              <span className="t-cmd">agent.status()</span>
+            </div>
+            <div className="t-line t-out">⚙ upgrade in progress…</div>
+            <div className="t-line t-ok">
+              knowledge base: retrained on fresh data
+            </div>
+            <div className="t-line t-ok">duplicate-memory bug: fixed</div>
+            <div className="t-line t-out">
+              deployment: rebuilding on new infrastructure
+            </div>
+            <div className="t-line t-info">
+              ● back online soon — worth the wait
+            </div>
+            <div className="t-line">
+              <span className="t-prompt">haroon@ai ~ %</span>
+              <span className="t-caret" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="hero-right">
+        <span className="kicker">Scheduled upgrade</span>
+        <h1>
+          The assistant is getting <span className="grad">smarter</span>.
+        </h1>
+        <p className="lede">
+          My AI assistant is being retrained and redeployed with an updated
+          knowledge base. In the meantime, the human version of me responds fast
+          too.
+        </p>
+        <div className="btn-row">
+          <a className="btn btn-primary" href="mailto:haroonjawad6@gmail.com">
+            👋 Email me directly
+          </a>
+          <Link href="/">
+            <a className="btn btn-ghost">Back to home</a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// ===========================================
 // EXPORTS
 // ===========================================
 
+const ChatPage = (): JSX.Element =>
+  ASSISTANT_LIVE ? <DedicatedChatPage /> : <AssistantWip />;
+
 export { DedicatedChatPage, FloatingChatWidget };
-export default DedicatedChatPage;
+export default ChatPage;
